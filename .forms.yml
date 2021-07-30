@@ -108,4 +108,4 @@ infra-aws:
         widget: simple_text
         type: string
         required: true
-        default: ""
+        default: "demo"

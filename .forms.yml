@@ -1,5 +1,5 @@
 ---
-default:
+infra-aws:
   pipeline:
     Terraform:
       - name: "AWS access key"

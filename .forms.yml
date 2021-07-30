@@ -74,7 +74,7 @@ infra-aws:
         widget: simple_text
         type: string
         required: true
-        default: "10.0.1.0/24"
+        default: "10.0.0.0/24"
     bastion:
       - name: "Number of bastions"
         description: "Number of bastions to create."
@@ -102,13 +102,6 @@ infra-aws:
         type: string
         required: true
         default: "0.0.0.0/0"
-      - name: "Bastion security group allow"
-        description: "Amazon source security group ID which will be allowed to connect on Fronts port 22 (ssh)."
-        key: bastion_sg_allow
-        widget: simple_text
-        type: string
-        required: true
-        default: "${data.terraform_remote_state.infrastructure.outputs.infra_bastion_sg_allow}"
       - name: "Keypair name"
         description: "The human-readable keypair name to be used for instances deployment."
         key: keypair_name

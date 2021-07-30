@@ -1,0 +1,33 @@
+---
+# Configuration of the Cycloid stack
+version: '2'
+name: 'Infrastructure Repository'
+canonical: 'stack-infra'
+status: 'public'
+keywords:
+  - 'vpc'
+  - 'bastion'
+description: |
+  This stack will deploy the base infrastructure.
+author: 'Olivier de Turckheim'
+image: 'https://raw.githubusercontent.com/cycloid-community-catalog/docs-step-by-step-stack/stack-aws/icon.png'
+
+config:
+  infra-aws:
+    name: 'Deploy on AWS'
+    description: 'Deploy on AWS'
+    cloud_provider: 'aws'
+
+    # Pipeline and variable configuration for the AWS CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/aws/pipeline.yml'
+      variables:
+        path: 'pipeline/aws/variables.sample.yml'
+        destination: '($ project $)/pipeline/aws/($ environment $)/variables.yml'
+
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/aws/main.tf'
+        destination: '($ project $)/terraform/aws/($ environment $)/main.tf'

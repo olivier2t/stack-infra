@@ -1,0 +1,118 @@
+---
+default:
+  pipeline:
+    Terraform:
+      - name: "AWS access key"
+        description: "Amazon AWS access key for Terraform."
+        key: aws_access_key
+        widget: cy_cred
+        type: string
+        default: "((aws.access_key))"
+      - name: "AWS secret key"
+        description: "Amazon AWS secret key for Terraform."
+        key: aws_secret_key
+        widget: cy_cred
+        type: string
+        default: "((aws.secret_key))"
+      - name: "Amazon AWS region"
+        description: "Amazon AWS region to use for Terraform."
+        key: aws_region
+        widget: auto_complete
+        type: string
+        values: ["eu-north-1","ap-south-1","eu-west-3","eu-west-2","eu-west-1","ap-northeast-2","ap-northeast-1","sa-east-1","ca-central-1","ap-southeast-1","ap-southeast-2","eu-central-1","us-east-1","us-east-2","us-west-1","us-west-2"]
+        default: eu-west-1
+      - name: "Terraform storage bucket"
+        description: "AWS S3 bucket name to store terraform remote state file."
+        key: terraform_storage_bucket_name
+        widget: simple_text
+        type: string
+        default: ($ organization_canonical $)-terraform-remote-state
+    Repos:
+      - name: "Config repository"
+        key: git_repository
+        type: string
+        widget: cy_crs
+        description: "Git repository URL containing the config of the stack."
+        default: "git@github.com:MyUser/config.git"
+        required: true
+      - name: "Config git key"
+        description: "SSH key pair to fetch the config Git repository."
+        key: git_private_key
+        type: string
+        widget: cy_cred
+        default: "((ssh_config.ssh_key))"
+        required: true
+      - name: "Config branch"
+        description: "Branch of the config Git repository."
+        key: git_branch
+        widget: cy_branch
+        type: string
+        description: "The branch used by the config repository"
+        source: git_repository
+        default: "main"
+        required: true
+
+  terraform:
+    network:
+      - name: "VPC CIDR"
+        description: "The CIDR of the VPC."
+        key: cidr
+        widget: simple_text
+        type: string
+        required: true
+        default: "10.0.0.0/16"
+      - name: "Private subnets"
+        description: "The private subnets for the VPC."
+        key: private_subnets
+        widget: simple_text
+        type: string
+        required: true
+        default: "10.0.1.0/24"
+      - name: "Public subnets"
+        description: "The public subnets for the VPC."
+        key: public_subnets
+        widget: simple_text
+        type: string
+        required: true
+        default: "10.0.1.0/24"
+    bastion:
+      - name: "Number of bastions"
+        description: "Number of bastions to create."
+        key: bastion_count
+        widget: slider_range
+        type: integer
+        default: 0
+        values:
+            - 0
+            - 2
+      - name: "Instance type"
+        description: "Instance type for the bastion."
+        key: bastion_instance_type
+        widget: auto_complete
+        type: string
+        default: "t3.micro"
+        values:
+            - "t3.micro"
+            - "t3.small"
+            - "t3.medium"
+      - name: "Connection to bastion"
+        description: "Networks allowed to connect to the bastion using SSH."
+        key: public_subnets_ids
+        widget: simple_text
+        type: string
+        required: true
+        default: "0.0.0.0/0"
+      - name: "Bastion security group allow"
+        description: "Amazon source security group ID which will be allowed to connect on Fronts port 22 (ssh)."
+        key: bastion_sg_allow
+        widget: simple_text
+        type: string
+        required: true
+        default: "${data.terraform_remote_state.infrastructure.outputs.infra_bastion_sg_allow}"
+      - name: "Keypair name"
+        description: "The human-readable keypair name to be used for instances deployment."
+        key: keypair_name
+        widget: simple_text
+        type: string
+        required: true
+        default: ""

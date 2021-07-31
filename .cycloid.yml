@@ -3,7 +3,7 @@
 version: '2'
 name: 'Infrastructure Repository'
 canonical: 'stack-infra'
-status: 'public'
+status: 'private'
 keywords:
   - 'vpc'
   - 'bastion'

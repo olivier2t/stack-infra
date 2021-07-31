@@ -1,7 +1,7 @@
 ---
 # Configuration of the Cycloid stack
 version: '2'
-name: 'Infrastructure Repository'
+name: 'Infrastructure'
 canonical: 'stack-infra'
 status: 'private'
 keywords:
@@ -10,7 +10,7 @@ keywords:
 description: |
   This stack will deploy the base infrastructure.
 author: 'Olivier de Turckheim'
-image: 'https://raw.githubusercontent.com/cycloid-community-catalog/docs-step-by-step-stack/stack-aws/icon.png'
+image: 'https://raw.githubusercontent.com/cycloid-community-catalog/stack-infrastructure/master/icon.png'
 
 config:
   infra-aws:

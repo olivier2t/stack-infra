@@ -22,27 +22,6 @@ resource_types:
       tag: ((terraform_version))
 
 resources:
-  # The Ansible stack (will be merged with the config)
-  - name: git_stack-ansible
-    type: git
-    icon: git
-    source:
-      uri: ((stack_git_repository))
-      branch: ((stack_git_branch))
-      paths:
-        - ((stack_ansible_path))/*
-
-  # The Ansible config (will be merged with the stack)
-  - name: git_config-ansible
-    type: git
-    icon: git
-    source:
-      uri: ((config_git_repository))
-      branch: ((config_git_branch))
-      private_key: ((config_git_private_key))
-      paths:
-        - ((config_ansible_path))/*
-
   # The Terraform stack (will be merged with the config)
   - name: git_stack-terraform
     type: git
@@ -74,13 +53,13 @@ resources:
         bucket: ((terraform_storage_bucket_name))
         key: ((project))-((env)).tfstate
         workspace_key_prefix: ((project))
-        region: ((aws_default_region))
+        region: ((aws_region))
         access_key: ((aws_access_key))
         secret_key: ((aws_secret_key))
       vars:
         access_key: ((aws_access_key))
         secret_key: ((aws_secret_key))
-        aws_region: ((aws_default_region))
+        aws_region: ((aws_region))
         env: ((env))
         project: ((project))
         customer: ((customer))
@@ -94,7 +73,6 @@ groups:
     jobs:
       - terraform-plan
       - terraform-apply
-      - deploy-nexus
       
   - name: destroy
     jobs:
@@ -201,49 +179,49 @@ jobs:
         get_params:
           action: destroy
 
-  - name: deploy-nexus
-    serial: true
-    build_logs_to_retain: 10
-    plan:
-      - in_parallel:
-        - get: git_stack-ansible
-          params: {depth: 1}
-          trigger: false
+  # - name: deploy-nexus
+  #   serial: true
+  #   build_logs_to_retain: 10
+  #   plan:
+  #     - in_parallel:
+  #       - get: git_stack-ansible
+  #         params: {depth: 1}
+  #         trigger: false
 
-        - get: git_config-ansible
-          params: {depth: 1}
-          trigger: false
+  #       - get: git_config-ansible
+  #         params: {depth: 1}
+  #         trigger: false
 
-        - get: tfstate
-          trigger: true
-          passed:
-            - terraform-apply
+  #       - get: tfstate
+  #         trigger: true
+  #         passed:
+  #           - terraform-apply
 
-      - task: merge-stack-and-config
-        config:
-          <<: *merge-stack-and-config
-          inputs:
-          - name: git_config-ansible
-            path: "config"
-          - name: git_stack-ansible
-            path: "stack"
-        params:
-          CONFIG_PATH: ((config_ansible_path))
-          STACK_PATH: ((stack_ansible_path))
+  #     - task: merge-stack-and-config
+  #       config:
+  #         <<: *merge-stack-and-config
+  #         inputs:
+  #         - name: git_config-ansible
+  #           path: "config"
+  #         - name: git_stack-ansible
+  #           path: "stack"
+  #       params:
+  #         CONFIG_PATH: ((config_ansible_path))
+  #         STACK_PATH: ((stack_ansible_path))
 
-      - task: run-ansible
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: cycloid/cycloid-toolkit
-              tag: ((ansible_version))
-          run:
-            path: /usr/bin/ansible-runner
-          caches:
-            - path: ansible-playbook/roles
-          inputs:
-            - name: merged-stack
-              path: ansible-playbook
-        params: ((ansible_params))
+  #     - task: run-ansible
+  #       config:
+  #         platform: linux
+  #         image_resource:
+  #           type: docker-image
+  #           source:
+  #             repository: cycloid/cycloid-toolkit
+  #             tag: ((ansible_version))
+  #         run:
+  #           path: /usr/bin/ansible-runner
+  #         caches:
+  #           - path: ansible-playbook/roles
+  #         inputs:
+  #           - name: merged-stack
+  #             path: ansible-playbook
+  #       params: ((ansible_params))

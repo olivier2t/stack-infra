@@ -10,12 +10,6 @@ variable "aws_region" {
   description = "AWS region to launch servers."
   default     = "eu-west-1"
 }
-variable "terraform_storage_bucket_name" {}
-
-# Config Repo
-variable "git_repository" {}
-variable "git_private_key" {}
-variable "git_branch" {}
 
 #
 # VPC infra module variables

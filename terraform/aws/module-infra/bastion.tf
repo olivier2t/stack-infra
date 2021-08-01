@@ -70,9 +70,8 @@ resource "aws_instance" "bastion" {
   instance_type = var.bastion_instance_type
   key_name      = var.keypair_name != "" ? var.keypair_name : "${var.customer}-${var.project}"
 
-  vpc_security_group_ids = aws_security_group.bastion[0].id]
+  vpc_security_group_ids = aws_security_group.bastion[0].id
 
-  iam_instance_profile    = aws_iam_instance_profile.infra.name
   subnet_id               = element(module.infra_vpc.public_subnets, count.index)
   disable_api_termination = false
 

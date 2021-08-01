@@ -58,5 +58,5 @@ locals {
     project      = var.project
     customer     = var.customer
   }
-  merged_tags = merge(local.standard_tags, var.extra_tags)
+  # merged_tags = merge(local.standard_tags, var.extra_tags)
 }

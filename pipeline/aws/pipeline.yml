@@ -29,6 +29,7 @@ resources:
     source:
       uri: ((stack_git_repository))
       branch: ((stack_git_branch))
+      private_key: ((config_git_private_key))
       paths:
         - ((stack_terraform_path))/*
 
@@ -65,7 +66,7 @@ resources:
         customer: ((customer))
       env:
         AWS_ACCESS_KEY_ID: ((aws_access_key))
-        AWS_DEFAULT_REGION: ((aws_default_region))
+        AWS_DEFAULT_REGION: ((aws_region))
         AWS_SECRET_ACCESS_KEY: ((aws_secret_key))
 
 groups:

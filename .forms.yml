@@ -86,7 +86,6 @@ infra-aws:
         default: 0
         values:
             - 0
-            - 1
             - 2
       - name: "Instance type"
         description: "Instance type for the bastion."

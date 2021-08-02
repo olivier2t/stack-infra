@@ -99,11 +99,12 @@ infra-aws:
             - "t3.medium"
       - name: "Connection to bastion"
         description: "Networks allowed to connect to the bastion using SSH."
-        key: public_subnets_ids
-        widget: simple_text
-        type: string
+        key: bastion_allowed_networks
+        widget: text_area
+        type: array
         required: true
-        default: "0.0.0.0/0"
+        default:
+            - [0.0.0.0/0]
       - name: "Keypair name"
         description: "The human-readable keypair name to be used for instances deployment."
         key: keypair_name

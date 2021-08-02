@@ -34,7 +34,7 @@ variable "bastion_count" {
 
 variable "bastion_allowed_networks" {
   description = "Networks allowed to connect to the bastion using SSH"
-  default     = "0.0.0.0/0"
+  default     = ["0.0.0.0/0"]
 }
 
 variable "bastion_instance_type" {

@@ -64,17 +64,19 @@ infra-aws:
       - name: "Private subnets"
         description: "The private subnets for the VPC."
         key: private_subnets
-        widget: simple_text
-        type: string
+        widget: text_area
+        type: array
+        default:
+            - [10.0.1.0/24]
         required: true
-        default: "[10.0.1.0/24]"
       - name: "Public subnets"
         description: "The public subnets for the VPC."
         key: public_subnets
-        widget: simple_text
-        type: string
+        widget: text_area
+        type: array
+        default:
+            - [10.0.0.0/24]
         required: true
-        default: "[10.0.0.0/24]"
     bastion:
       - name: "Number of bastions"
         description: "Number of bastions to create."

@@ -67,7 +67,7 @@ infra-aws:
         widget: text_area
         type: array
         default:
-            - [10.0.1.0/24]
+            - 10.0.1.0/24
         required: true
       - name: "Public subnets"
         description: "The public subnets for the VPC."
@@ -75,7 +75,7 @@ infra-aws:
         widget: text_area
         type: array
         default:
-            - [10.0.0.0/24]
+            - 10.0.0.0/24
         required: true
     bastion:
       - name: "Number of bastions"
@@ -86,6 +86,7 @@ infra-aws:
         default: 0
         values:
             - 0
+            - 1
             - 2
       - name: "Instance type"
         description: "Instance type for the bastion."
@@ -104,7 +105,7 @@ infra-aws:
         type: array
         required: true
         default:
-            - [0.0.0.0/0]
+            - 0.0.0.0/0
       - name: "Keypair name"
         description: "The human-readable keypair name to be used for instances deployment."
         key: keypair_name

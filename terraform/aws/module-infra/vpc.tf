@@ -4,6 +4,7 @@ module "infra_vpc" {
 
   name = "${var.customer}-${var.project}-${var.env}"
   cidr = var.cidr
+  azs  = [var.aws_region]
 
   public_subnets     = var.public_subnets
   private_subnets    = var.private_subnets

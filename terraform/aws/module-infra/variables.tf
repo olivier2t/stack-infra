@@ -51,6 +51,10 @@ variable "keypair_name" {
 #   description = "The public SSH key, for SSH access to newly-created instances"
 # }
 
+variable "extra_tags" {
+  default = {}
+}
+
 locals {
   standard_tags = {
     "cycloid.io" = "true"
@@ -58,5 +62,5 @@ locals {
     project      = var.project
     customer     = var.customer
   }
-  # merged_tags = merge(local.standard_tags, var.extra_tags)
+  merged_tags = merge(local.standard_tags, var.extra_tags)
 }

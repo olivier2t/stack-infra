@@ -7,6 +7,10 @@ module "infra" {
   customer = var.customer
   #####################################
 
+  #. extra_tags (optional): {}
+  #+ Dict of extra tags to add on aws resources. format { "foo" = "bar" }.
+  extra_tags = { "demo" = true }
+
   #
   # VPC
   #

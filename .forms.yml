@@ -7,13 +7,13 @@ infra-aws:
         key: aws_access_key
         widget: cy_cred
         type: string
-        default: "((aws.access_key))"
+        default: "((aws_aws-olivier.access_key))"
       - name: "AWS secret key"
         description: "Amazon AWS secret key for Terraform."
         key: aws_secret_key
         widget: cy_cred
         type: string
-        default: "((aws.secret_key))"
+        default: "((aws_aws-olivier.secret_key))"
       - name: "Amazon AWS region"
         description: "Amazon AWS region to use for Terraform."
         key: aws_region
@@ -33,14 +33,14 @@ infra-aws:
         type: string
         widget: cy_crs
         description: "Git repository URL containing the config of the stack."
-        default: "git@github.com:MyUser/config.git"
+        default: "git@github.com:olivier2t/config.git"
         required: true
       - name: "Config git key"
         description: "SSH key pair to fetch the config Git repository."
         key: git_private_key
         type: string
         widget: cy_cred
-        default: "((ssh_config.ssh_key))"
+        default: "((ssh_github.ssh_key))"
         required: true
       - name: "Config branch"
         description: "Branch of the config Git repository."

@@ -135,7 +135,7 @@ jobs:
             - terraform-plan
 
         - get: tfstate
-          trigger: false
+          trigger: true
           passed:
             - terraform-plan
 

@@ -48,14 +48,9 @@ variable "bastion_instance_type" {
   default     = "t3.micro"
 }
 
-variable "keypair_name" {
-  description = "The human-readable keypair name to be used for instances deployment"
-  default     = ""
+variable "keypair_public" {
+  description = "The public SSH key, for SSH access to newly-created instances"
 }
-
-# variable "keypair_public" {
-#   description = "The public SSH key, for SSH access to newly-created instances"
-# }
 
 variable "extra_tags" {
   default = {}

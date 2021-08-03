@@ -67,7 +67,7 @@ resources:
         bastion_count: ((bastion_count))
         bastion_allowed_networks: ((bastion_allowed_networks))
         bastion_instance_type: ((bastion_instance_type))
-        keypair_name: ((keypair_name))
+        keypair_public: ((keypair_public))
         env: ((env))
         project: ((project))
         customer: ((customer))

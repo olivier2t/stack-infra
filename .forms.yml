@@ -105,10 +105,10 @@ infra-aws:
         required: true
         default:
             - 0.0.0.0/0
-      - name: "Keypair name"
-        description: "The human-readable keypair name to be used for instances deployment."
-        key: keypair_name
+      - name: "Keypair public"
+        description: "The public SSH key, for SSH access to newly-created instances."
+        key: keypair_public
         widget: simple_text
         type: string
         required: true
-        default: "demo"
+        default: "((custom_keypair.ssh_pub))"

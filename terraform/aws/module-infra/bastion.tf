@@ -63,12 +63,17 @@ resource "aws_eip" "bastion" {
   })
 }
 
+resource "aws_key_pair" "bastion" {
+  key_name   = "bastion-key"
+  public_key = var.keypair_public
+}
+
 resource "aws_instance" "bastion" {
   count = var.bastion_count
 
   ami           = data.aws_ami.debian.id
   instance_type = var.bastion_instance_type
-  key_name      = var.keypair_name != "" ? var.keypair_name : "${var.customer}-${var.project}"
+  key_name      = aws_key_pair.bastion.key_name
 
   vpc_security_group_ids = [aws_security_group.bastion[0].id]
 

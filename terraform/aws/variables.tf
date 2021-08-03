@@ -24,5 +24,4 @@ variable "public_subnets" {}
 variable "bastion_count" {}
 variable "bastion_allowed_networks" {}
 variable "bastion_instance_type" {}
-variable "keypair_name" {}
-# variable "keypair_public" {}
+variable "keypair_public" {}

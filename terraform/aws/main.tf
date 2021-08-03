@@ -43,11 +43,7 @@ module "infra" {
   #+ Instance type for the bastion
   bastion_instance_type = var.bastion_instance_type
 
-  #. keypair_name: ""
-  #+ The human-readable keypair name to be used for instances deployment
-  keypair_name = var.keypair_name
-
-  #. keypair_public: ""
-  #+ The public SSH key, for SSH access to newly-created instances
-  # keypair_public = var.keypair_public
+  # . keypair_public: ""
+  # + The public SSH key, for SSH access to newly-created instances
+  keypair_public = var.keypair_public
 }

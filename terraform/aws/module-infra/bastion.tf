@@ -2,7 +2,7 @@ resource "aws_security_group" "bastion" {
   count = var.bastion_count > 0 ? 1 : 0
 
   name        = "bastion"
-  description = "Allow SSH traffic from the internet"
+  description = "Allow SSH traffic from the internet to bastion"
   vpc_id      = module.infra_vpc.vpc_id
 
   ingress {
@@ -70,7 +70,7 @@ resource "aws_instance" "bastion" {
   instance_type = var.bastion_instance_type
   key_name      = var.keypair_name != "" ? var.keypair_name : "${var.customer}-${var.project}"
 
-  vpc_security_group_ids = aws_security_group.bastion[0].id
+  vpc_security_group_ids = [aws_security_group.bastion[0].id]
 
   subnet_id               = element(module.infra_vpc.public_subnets, count.index)
   disable_api_termination = false

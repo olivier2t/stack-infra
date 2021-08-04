@@ -111,4 +111,4 @@ infra-aws:
         widget: cy_cred
         type: string
         required: true
-        default: "((custom_keypair.ssh_pub))"
+        default: "custom_keypair/ssh_pub"

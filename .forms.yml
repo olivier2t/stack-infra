@@ -27,6 +27,13 @@ infra-aws:
         widget: simple_text
         type: string
         default: ($ organization_canonical $)-terraform-remote-state
+      - name: "Keypair public"
+        description: "The public SSH key, for SSH access to newly-created instances."
+        key: keypair_public
+        widget: cy_cred
+        type: string
+        required: true
+        default: "((custom_keypair.ssh_pub))"
     Repos:
       - name: "Config repository"
         key: git_repository
@@ -105,10 +112,3 @@ infra-aws:
         required: true
         default:
             - 0.0.0.0/0
-      - name: "Keypair public"
-        description: "The public SSH key, for SSH access to newly-created instances."
-        key: keypair_public
-        widget: cy_cred
-        type: string
-        required: true
-        default: "custom_keypair/ssh_pub"

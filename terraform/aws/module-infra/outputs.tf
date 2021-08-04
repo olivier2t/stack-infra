@@ -24,11 +24,6 @@ output "public_subnets" {
 #
 # Bastion outputs
 #
-output "keypair_name" {
-  description = "The deployment keypair name"
-  value       = var.keypair_name != "" ? var.keypair_name : "${var.customer}-${var.project}"
-}
-
 output "bastion_ip" {
   description = "The EIP attached to the bastion EC2 server"
   value       = aws_eip.bastion.*.public_ip

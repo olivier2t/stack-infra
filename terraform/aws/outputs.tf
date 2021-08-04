@@ -24,11 +24,6 @@ output "public_subnets" {
 #
 # Bastion outputs
 #
-output "keypair_name" {
-  description = "The deployment keypair name"
-  value       = module.infra.keypair_name
-}
-
 output "bastion_ip" {
   description = "The EIP attached to the bastion EC2 server"
   value       = module.infra.bastion_ip

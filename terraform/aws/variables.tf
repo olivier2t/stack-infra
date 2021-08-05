@@ -3,6 +3,9 @@ variable "env" {}
 variable "project" {}
 variable "customer" {}
 
+# Terraform version
+variable "terraform_version" {}
+
 # AWS variables
 variable "aws_access_key" {}
 variable "aws_secret_key" {}

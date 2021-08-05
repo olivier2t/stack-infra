@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.15"
+  required_version = ">= ${var.terraform_version}"
   
   required_providers {
     aws = {

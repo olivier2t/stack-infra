@@ -107,3 +107,7 @@ project: ($ project $)
 #. customer (required): ($ organization_canonical $)
 #+ Name of the Cycloid Organization, used as customer variable name.
 customer: ($ organization_canonical $)
+
+#. terraform_version (required): '0.15.2'
+#+ terraform version used to execute your code.
+terraform_version: '0.15.2'

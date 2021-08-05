@@ -29,6 +29,7 @@ resources:
     source:
       uri: ((stack_git_repository))
       branch: ((stack_git_branch))
+      private_key: ((config_git_private_key))
       paths:
         - ((stack_terraform_path))/*
 
@@ -51,7 +52,7 @@ resources:
       backend_type: s3
       backend_config:
         bucket: ((terraform_storage_bucket_name))
-        key: infra.tfstate
+        key: ((env))/infra.tfstate
         region: ((aws_region))
         access_key: ((aws_access_key))
         secret_key: ((aws_secret_key))
@@ -69,6 +70,7 @@ resources:
         env: ((env))
         project: ((project))
         customer: ((customer))
+        terraform_version: ((terraform_version))
       env:
         AWS_ACCESS_KEY_ID: ((aws_access_key))
         AWS_DEFAULT_REGION: ((aws_region))

@@ -10,7 +10,7 @@ keywords:
 description: |
   This stack will deploy the base infrastructure.
 author: 'Olivier de Turckheim'
-image: 'https://raw.githubusercontent.com/cycloid-community-catalog/stack-infrastructure/master/icon.png'
+image: 'https://raw.githubusercontent.com/olivier2t/stack-infra/main/icon.png'
 
 config:
   infra-aws:

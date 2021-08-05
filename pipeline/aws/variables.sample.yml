@@ -1,5 +1,5 @@
 #
-# Terraform
+# Cloud Provider
 #
 
 # Amazon access to use to run terraform. Usually admin account to be able to create Amazon services.
@@ -20,8 +20,13 @@ aws_region: eu-west-1
 #+ AWS S3 bucket name to store terraform remote state file.
 terraform_storage_bucket_name: ($ organization_canonical $)-terraform-remote-state
 
+#. keypair_public (optional): ((custom_keypair.ssh_pub))
+#+ The public SSH key, for SSH access to newly-created instances
+keypair_public: ((custom_keypair.ssh_pub))
+
+
 #
-# Repos
+# Stack Configuration
 #
 
 #. config_git_repository (required): git@github.com:olivier2t/config.git
@@ -52,6 +57,41 @@ stack_git_branch: main
 #+ Path of Terraform files in the stack git repository
 stack_terraform_path: terraform/aws
 
+
+#
+# VPC
+#
+
+#. cidr (required): '10.0.0.0/16'
+#+ The CIDR of the VPC.
+cidr: '10.0.0.0/16'
+
+#. private_subnets (required): ['10.0.1.0/24']
+#+ The private subnets for the VPC.
+private_subnets: ['10.0.1.0/24']
+
+#. public_subnets (required): ['10.0.0.0/24']
+#+ The public subnets for the VPC.
+public_subnets: ['10.0.0.0/24']
+
+
+#
+# Bastion
+#
+
+#. bastion_count (required): 0
+#+ Number of bastions to create.
+bastion_count: 0
+
+#. bastion_instance_type (required): t3.small
+#+ Instance type for the bastion.
+bastion_instance_type: t3.small
+
+#. bastion_allowed_networks (required): ['0.0.0.0/0']
+#+ Networks allowed to connect to the bastion using SSH.
+bastion_allowed_networks: ['0.0.0.0/0']
+
+
 #
 # Default variables that shouldn't be changed except if needed
 #
@@ -67,37 +107,3 @@ project: ($ project $)
 #. customer (required): ($ organization_canonical $)
 #+ Name of the Cycloid Organization, used as customer variable name.
 customer: ($ organization_canonical $)
-
-#. terraform_version (required): '0.15.2'
-#+ terraform version used to execute your code.
-terraform_version: '0.15.2'
-
-cidr: '10.0.0.0/16'
-private_subnets: ['10.0.1.0/24']
-public_subnets: 
-bastion_count: 1
-bastion_allowed_networks: ['0.0.0.0/0']
-bastion_instance_type: t3.small
-keypair_public: ((custom_keypair.ssh_pub))
-
-# #. cycloid-toolkit ansible version (required): 'v2.7'
-# #+ cycloid-toolkit docker image tag to use (https://hub.docker.com/r/cycloid/cycloid-toolkit/tags).
-# ansible_version: 'v2.7'
-
-# #. ansible_params (required): dict
-# #+ Parameters of ansible-runner script. Can be found here: https://github.com/cycloidio/docker-cycloid-toolkit#ansible-runner
-# ansible_params:
-#   SSH_JUMP_URL: user1@Bastion1
-#   SSH_PRIVATE_KEYS:
-#     - ((ssh_bastion.ssh_key))
-#   # ANSIBLE_PLAYBOOK_PATH should be "ansible-playbook/" + (git_ansible_path)
-#   ANSIBLE_PLAYBOOK_PATH: ansible-playbook/
-#   ANSIBLE_PLAYBOOK_NAME: playbook.yml
-#   EXTRA_ANSIBLE_VARS:
-#     customer: ($ organization_canonical $)
-#     project: ($ project $)
-#     env: ($ environment $)
-# # If you are using Amazon EC2 dynamic inventory
-#   #AWS_DEFAULT_REGION: eu-west-1
-#   #AWS_ACCESS_KEY_ID: ((aws.access_key))
-#   #AWS_SECRET_ACCESS_KEY: ((aws.secret_key))

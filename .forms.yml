@@ -1,7 +1,7 @@
 ---
 infra-aws:
   pipeline:
-    Terraform:
+    Cloud Provider:
       - name: "AWS access key"
         description: "Amazon AWS access key for Terraform."
         key: aws_access_key
@@ -32,9 +32,10 @@ infra-aws:
         key: keypair_public
         widget: cy_cred
         type: string
-        required: true
+        required: false
         default: "((custom_keypair.ssh_pub))"
-    Repos:
+
+    Stack Configuration:
       - name: "Config repository"
         key: git_repository
         type: string
@@ -54,13 +55,12 @@ infra-aws:
         key: git_branch
         widget: cy_branch
         type: string
-        description: "The branch used by the config repository"
         source: git_repository
         default: "main"
         required: true
 
   terraform:
-    network:
+    VPC:
       - name: "VPC CIDR"
         description: "The CIDR of the VPC."
         key: cidr
@@ -84,7 +84,8 @@ infra-aws:
         default:
             - 10.0.0.0/24
         required: true
-    bastion:
+
+    Bastion:
       - name: "Number of bastions"
         description: "Number of bastions to create."
         key: bastion_count
@@ -101,9 +102,10 @@ infra-aws:
         type: string
         default: "t3.micro"
         values:
-            - "t3.micro"
-            - "t3.small"
-            - "t3.medium"
+            - t3.nano
+            - t3.micro
+            - t3.small
+            - t3.medium
       - name: "Connection to bastion"
         description: "Networks allowed to connect to the bastion using SSH."
         key: bastion_allowed_networks

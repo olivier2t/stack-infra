@@ -29,6 +29,11 @@ output "bastion_ip" {
   value       = module.infra.bastion_ip
 }
 
+output "bastion_user" {
+  description = "The username to use to connect to the bastion EC2 server. Set to 'admin' because we use debian OS."
+  value       = "admin"
+}
+
 output "bastion_sg" {
   description = "The bastion security group ID."
   value       = module.infra.bastion_sg

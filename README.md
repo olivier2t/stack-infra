@@ -59,12 +59,11 @@ In order to run this task, a couple elements are required:
 |Name|Description|Type|Default|Required|
 |---|---|:---:|:---:|:---:|
 |`cidr`|The CIDR of the VPC|`-`|`10.0.0.0/16`|`False`|
-|`private_subnets`|The private subnets for the VPC|`list`|`["10.0.0.0/24", "10.0.2.0/24", "10.0.4.0/24"]`|`False`|
-|`public_subnets`|The public subnets for the VPC|`list`|`["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24"]`|`False`|
+|`private_subnets`|The private subnets for the VPC|`list`|`["10.0.1.0/24"]`|`False`|
+|`public_subnets`|The public subnets for the VPC|`list`|`["10.0.0.0/24"]`|`False`|
 |`bastion_count`|Number of bastions to create|`-`|`1`|`False`|
 |`bastion_instance_type`|Instance type for the bastion|`-`|`t3.micro`|`False`|
-|`bastion_allowed_networks`|Networks allowed to connect to the bastion using SSH|`-`|`0.0.0.0/0`|`False`|
-
+|`bastion_allowed_networks`|Networks allowed to connect to the bastion using SSH|`list`|`["0.0.0.0/0"]`|`False`|
 
 **Outputs**
 

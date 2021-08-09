@@ -5,7 +5,7 @@ variable "project" {}
 
 # AWS
 variable "aws_region" {
-  description = "AWS region to launch servers."
+  description = "AWS region where to create servers."
   default     = "eu-west-1"
 }
 

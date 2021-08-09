@@ -81,7 +81,7 @@ public_subnets: ['10.0.0.0/24']
 
 #. bastion_count (required): 0
 #+ Number of bastions to create.
-bastion_count: 0
+bastion_count: 1
 
 #. bastion_instance_type (required): t3.small
 #+ Instance type for the bastion.

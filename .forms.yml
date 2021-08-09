@@ -91,7 +91,7 @@ infra-aws:
         key: bastion_count
         widget: slider_range
         type: integer
-        default: 0
+        default: 1
         values:
             - 0
             - 2
